@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cra-compliance-mcp"
+version = "1.0.0"
+description = "EU Cyber Resilience Act (Regulation 2024/2847) compliance for AI agents. Product classification, Annex I audit, SBOM generation, conformity assessment roadmap, vulnerability reporting readiness. For manufacturers of products with digital elements. By MEOK AI Labs."
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "MEOK AI Labs", email = "nicholas@meok.ai"}]
+keywords = ["mcp", "cra", "cyber-resilience-act", "eu-cra", "product-with-digital-elements", "ce-marking", "sbom", "cyclonedx", "iot-security", "meok-ai-labs", "eu-regulation", "manufacturer-compliance", "annex-i", "conformity-assessment"]
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent", "Topic :: Security"]
+dependencies = ["mcp>=1.0.0"]
+
+[project.urls]
+Homepage = "https://meok.ai/cra-compliance-mcp"
+Repository = "https://github.com/CSOAI-ORG/cra-compliance-mcp"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+only-include = ["server.py"]
+
+[project.scripts]
+cra-compliance-mcp = "server:main"
