@@ -84,3 +84,4 @@ Also see: [CRA Annex IV Classifier MCP](https://github.com/CSOAI-ORG/meok-cra-an
 ## License
 
 MIT
+<!-- mcp-name: io.github.CSOAI-ORG/cra-compliance-mcp -->
