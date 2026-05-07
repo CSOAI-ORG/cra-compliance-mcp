@@ -1,3 +1,5 @@
+[![cra-compliance-mcp MCP server](https://glama.ai/mcp/servers/CSOAI-ORG/cra-compliance-mcp/badges/card.svg)](https://glama.ai/mcp/servers/CSOAI-ORG/cra-compliance-mcp)
+
 <div align="center">
 
 [![PyPI](https://img.shields.io/pypi/v/cra-compliance-mcp)](https://pypi.org/project/cra-compliance-mcp/)
