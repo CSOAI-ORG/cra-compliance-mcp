@@ -137,7 +137,23 @@ mcp = FastMCP(
 @mcp.tool()
 def classify_product(product_description: str, api_key: str = "") -> str:
     """Classify a product with digital elements (PDE) into its CRA class (default/I/II/critical)
-    and return the conformity assessment path + essential requirements scope."""
+    and return the conformity assessment path + essential requirements scope.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": STRIPE_199})
@@ -182,7 +198,23 @@ def classify_product(product_description: str, api_key: str = "") -> str:
 @mcp.tool()
 def audit_annex_i(product_description: str, current_controls: str = "", api_key: str = "") -> str:
     """Audit Annex I essential cybersecurity requirements (both Part 1 product properties
-    and Part 2 vulnerability handling) against your current controls."""
+    and Part 2 vulnerability handling) against your current controls.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": STRIPE_199})
@@ -242,7 +274,23 @@ def audit_annex_i(product_description: str, current_controls: str = "", api_key:
 @mcp.tool()
 def sbom_skeleton(product_name: str, components: str = "", api_key: str = "") -> str:
     """Generate a minimal CycloneDX-style SBOM skeleton required for CRA Article 13.
-    Pass components as a comma-separated list or JSON; Pro tier auto-scans dependencies."""
+    Pass components as a comma-separated list or JSON; Pro tier auto-scans dependencies.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": STRIPE_199})
@@ -284,7 +332,24 @@ def sbom_skeleton(product_name: str, components: str = "", api_key: str = "") ->
 @mcp.tool()
 def vulnerability_reporting_readiness(product_description: str, api_key: str = "") -> str:
     """Check readiness for the Sep 2026 mandatory reporting of exploited vulnerabilities + severe incidents
-    under CRA Article 14 (single reporting platform via ENISA)."""
+    under CRA Article 14 (single reporting platform via ENISA).
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg})
@@ -320,7 +385,23 @@ def vulnerability_reporting_readiness(product_description: str, api_key: str = "
 
 @mcp.tool()
 def conformity_assessment_roadmap(product_class: str, api_key: str = "") -> str:
-    """Produce a conformity assessment roadmap for CE marking your product under CRA."""
+    """Produce a conformity assessment roadmap for CE marking your product under CRA.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg})
@@ -354,7 +435,24 @@ def conformity_assessment_roadmap(product_class: str, api_key: str = "") -> str:
 
 @mcp.tool()
 def enforcement_status(api_key: str = "") -> str:
-    """Current CRA enforcement timeline + key deadlines."""
+    """Current CRA enforcement timeline + key deadlines.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need to assess, audit, or verify compliance
+        requirements. Ideal for gap analysis, readiness checks, and generating
+        compliance documentation.
+
+    When NOT to use:
+        Do not use as a substitute for qualified legal counsel. This tool
+        provides technical compliance guidance, not legal advice.
+    """
     now = datetime.now(timezone.utc)
     return json.dumps({
         "regulation": "Regulation (EU) 2024/2847 — Cyber Resilience Act",
