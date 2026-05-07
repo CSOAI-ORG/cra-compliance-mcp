@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cra-compliance-mcp"
-version = "1.0.0"
+version = "1.2.2"
 description = "EU Cyber Resilience Act (Regulation 2024/2847) compliance for AI agents. Product classification, Annex I audit, SBOM generation, conformity assessment roadmap, vulnerability reporting readiness. For manufacturers of products with digital elements. By MEOK AI Labs."
 license = {file = "LICENSE"}
 readme = "README.md"
