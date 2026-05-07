@@ -1,0 +1,40 @@
+name: cra-compliance-mcp
+description: 'Cra Compliance tools for AI agents. Built by MEOK AI Labs.'
+version: 1.0.0
+tools:
+- name: classify_product
+  description: 'Classify Product operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: audit_annex_i
+  description: 'Audit Annex I operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: sbom_skeleton
+  description: 'Sbom Skeleton operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: vulnerability_reporting_readiness
+  description: 'Vulnerability Reporting Readiness operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: conformity_assessment_roadmap
+  description: 'Conformity Assessment Roadmap operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
+- name: enforcement_status
+  description: 'Enforcement Status operation.'
+  parameters:
+  - name: input
+    type: string
+    required: true
