@@ -153,6 +153,11 @@ def classify_product(product_description: str, api_key: str = "") -> str:
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        product_description (str): The product description to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -228,6 +233,12 @@ def audit_annex_i(product_description: str, current_controls: str = "", api_key:
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        product_description (str): The product description to analyze or process.
+        current_controls (str): The current controls to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -318,6 +329,12 @@ def sbom_skeleton(product_name: str, components: str = "", api_key: str = "") ->
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        product_name (str): The product name to analyze or process.
+        components (str): The components to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -391,6 +408,11 @@ def vulnerability_reporting_readiness(product_description: str, api_key: str = "
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        product_description (str): The product description to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -457,6 +479,11 @@ def conformity_assessment_roadmap(product_class: str, api_key: str = "") -> str:
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        product_class (str): The product class to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -522,6 +549,10 @@ def enforcement_status(api_key: str = "") -> str:
     When NOT to use:
         Do not use as a substitute for qualified legal counsel. This tool
         provides technical compliance guidance, not legal advice.
+
+    Args:
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
