@@ -1,0 +1,45 @@
+# cra-compliance-mcp
+# Purpose: EU Cyber Resilience Act (Regulation EU 2024/2847) compliance for products with digital elements.
+# Context: CRA applies to all hardware and software products with digital elements on the EU market. Enforcement Q4 2027.
+
+## Install
+```bash
+pip install cra-compliance-mcp
+```
+
+## Auth & Rate Limits
+- Free tier: 10 calls/day. No API key required.
+- Pro tier (£79/mo): unlimited + signed attestations. https://buy.stripe.com/14A4gB3K4eUWgYR56o8k836
+- Enterprise (£1,499/mo): white-label + on-premise. hello@meok.ai
+- All tools accept optional `api_key` parameter.
+
+## Tools (7)
+
+### `classify_product(product_description: str)`
+Classify a product with digital elements (PDE) into its CRA class (default/I/II/critical)
+
+### `audit_annex_i(product_description: str, current_controls: str = "")`
+Audit Annex I essential cybersecurity requirements (both Part 1 product properties
+
+### `sbom_skeleton(product_name: str, components: str = "")`
+Generate a minimal CycloneDX-style SBOM skeleton required for CRA Article 13.
+
+### `vulnerability_reporting_readiness(product_description: str)`
+Check readiness for the Sep 2026 mandatory reporting of exploited vulnerabilities + severe incidents
+
+### `conformity_assessment_roadmap(product_class: str)`
+Produce a conformity assessment roadmap for CE marking your product under CRA.
+
+### `enforcement_status((none))`
+Current CRA enforcement timeline + key deadlines.
+
+### `sign_cra_attestation(entity_name: str, overall_score: float, findings_csv: str = "", requirements_audited_csv: str = "", include_pdf_base64: bool = False)`
+Generate a cryptographically signed CRA (Cyber Resilience Act) compliance attestation
+
+## Pairs with
+- `meok-attestation-verify` — public verification of signed certs
+- `meok-attestation-api` (https://meok-attestation-api.vercel.app) — HMAC signing endpoint
+- Other MEOK governance MCPs via `mcp_bridge_call`
+
+## Maintainer
+MEOK AI Labs · hello@meok.ai · https://meok.ai · MIT licensed

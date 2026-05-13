@@ -1,0 +1,13 @@
+# Cyber Resilience Act (CRA) MCP - Auto-trigger Rules
+
+When the user asks about Cyber Resilience Act, Regulation (EU) 2024/2847, products with digital elements, CE marking for software, or vulnerability disclosure, use cra-compliance-mcp tools:
+
+- **classify_product**: Determine if your product is in CRA scope (class I, II, default)
+- **list_essential_requirements**: Annex I essential cybersecurity requirements
+- **check_cra_compliance**: Full assessment against Annex I + manufacturer obligations
+- **vulnerability_disclosure_template**: Article 14 coordinated disclosure template
+- **sign_cra_attestation**: HMAC-signed conformity declaration (Pro+)
+
+Install: `pip install cra-compliance-mcp`
+
+CRA enforcement expected Q4 2027. Major manufacturer obligations: vulnerability reporting within 24h, SBOM, 5-year support.

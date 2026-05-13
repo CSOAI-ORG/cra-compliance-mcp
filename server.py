@@ -48,6 +48,61 @@ except ImportError:
         return True, "OK", "free"
 
 
+try:
+    from attestation import get_attestation_tool_response
+    _ATTESTATION_LOCAL = True
+except ImportError:
+    _ATTESTATION_LOCAL = False
+
+_ATTESTATION_API = _os.environ.get(
+    "MEOK_ATTESTATION_API", "https://meok-attestation-api.vercel.app"
+)
+
+
+def _sign_via_api(api_key: str, regulation: str, entity: str, score: float,
+                  findings: list, articles_audited: list, tier: str = "pro",
+                  include_pdf_base64: bool = False) -> dict:
+    """Fallback: hit the remote MEOK signing API when the local module isn't present.
+    Used by PyPI-installed MCPs that don't have ~/clawd/meok-labs-engine/shared on path."""
+    import urllib.request as _url, urllib.error as _urlerr
+    payload = {
+        "api_key": api_key, "regulation": regulation, "entity": entity,
+        "score": score, "findings": findings or [],
+        "articles_audited": articles_audited or [], "tier": tier,
+    }
+    try:
+        req = _url.Request(
+            f"{_ATTESTATION_API}/sign",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+        )
+        with _url.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read())
+    except _urlerr.HTTPError as e:
+        try:
+            return json.loads(e.read())
+        except Exception:
+            return {"error": f"Attestation API HTTP {e.code}. Contact hello@meok.ai."}
+    except Exception as e:
+        return {"error": f"Could not reach MEOK attestation API: {e}. Contact hello@meok.ai."}
+
+
+def _attestation(regulation, entity, score, findings, articles_audited, tier,
+                 include_pdf_base64, api_key):
+    """Try local module first (fast, for Nick's dev machine), fall back to remote API."""
+    if _ATTESTATION_LOCAL:
+        return get_attestation_tool_response(
+            regulation=regulation, entity=entity, score=score, findings=findings,
+            articles_audited=articles_audited, tier=tier,
+            include_pdf_base64=include_pdf_base64,
+        )
+    return _sign_via_api(
+        api_key=api_key, regulation=regulation, entity=entity, score=score,
+        findings=findings, articles_audited=articles_audited or [], tier=tier,
+        include_pdf_base64=include_pdf_base64,
+    )
+
+
 def check_access(api_key: str = ""):
     return _shared_check_access(api_key)
 
@@ -583,6 +638,50 @@ def enforcement_status(api_key: str = "") -> str:
         "current_status": "IN_FORCE (transition period)",
         "penalty_summary": "Up to €15M or 2.5% global turnover (Annex I); €5M or 1% (other); €2.5M or 0.5% (misleading info)",
     }, indent=2)
+
+
+@mcp.tool()
+def sign_cra_attestation(
+    entity_name: str,
+    overall_score: float,
+    findings_csv: str = "",
+    requirements_audited_csv: str = "",
+    include_pdf_base64: bool = False,
+    api_key: str = "",
+) -> str:
+    """Generate a cryptographically signed CRA (Cyber Resilience Act) compliance attestation
+    (Pro/Enterprise).
+
+    Uses the shared MEOK attestation module — HMAC-SHA256 signed JSON + public verify URL
+    + optional board-ready PDF. Auditors validate via verify_url without backend access.
+    Expires 365 days from issue.
+
+    - findings_csv: comma-separated findings (e.g. "Annex I.1 cybersecurity-by-design PASS,Annex I.2 vulnerability handling GAP")
+    - requirements_audited_csv: comma-separated Annex I requirement IDs (e.g. "1,2,3")
+    - include_pdf_base64: True to receive PDF as base64
+    """
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return json.dumps({"error": msg, "upgrade_url": STRIPE_199})
+    if tier == "free":
+        return json.dumps({
+            "error": "Signed attestations require Pro (£199/mo) or Enterprise tier.",
+            "upgrade_url": STRIPE_199,
+            "why_pro": "HMAC-signed attestations with public verify URL. Auditor-accepted, unlike unsigned self-reports.",
+        })
+    findings = [f.strip() for f in findings_csv.split(",") if f.strip()]
+    reqs = [r.strip() for r in requirements_audited_csv.split(",") if r.strip()]
+    cert = _attestation(
+        regulation="CRA (Regulation (EU) 2024/2847 — Cyber Resilience Act)",
+        entity=entity_name,
+        score=overall_score,
+        findings=findings or [f"Overall CRA posture score: {overall_score}"],
+        articles_audited=reqs or None,
+        tier=tier,
+        include_pdf_base64=include_pdf_base64,
+        api_key=api_key,
+    )
+    return json.dumps(cert, indent=2)
 
 
 def main():
