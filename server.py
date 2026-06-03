@@ -26,7 +26,14 @@ import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from collections import defaultdict
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import FastMCP, Context
+try:
+    from meok_x402 import paywalled, is_paid_call  # x402 per-call agent billing — no-op unless X402_ENABLED
+except ImportError:  # vendored module absent — stay free
+    def paywalled(*_a, **_k):
+        return lambda fn: fn
+    def is_paid_call() -> bool:
+        return False
 
 import os as _os
 import sys
@@ -118,6 +125,8 @@ STRIPE_5K = "https://buy.stripe.com/4gM7sN2G0bIKeQJfL28k833"
 def _rl(caller: str = "anonymous", tier: str = "free") -> Optional[str]:
     if tier in ("pro", "professional", "enterprise"):
         return None
+    if is_paid_call():
+        return None  # settled x402 payment — this call is already paid for
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=1)
     _usage[caller] = [t for t in _usage[caller] if t > cutoff]
@@ -189,8 +198,12 @@ mcp = FastMCP(
 
 
 @mcp.tool()
-def classify_product(product_description: str, api_key: str = "") -> str:
-    """Classify a product with digital elements (PDE) into its CRA class (default/I/II/critical)
+@paywalled(price="$0.10")
+def classify_product(product_description: str, api_key: str = "",
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.10/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    Classify a product with digital elements (PDE) into its CRA class (default/I/II/critical)
     and return the conformity assessment path + essential requirements scope.
 
     Behavior:
@@ -269,8 +282,12 @@ def classify_product(product_description: str, api_key: str = "") -> str:
 
 
 @mcp.tool()
-def audit_annex_i(product_description: str, current_controls: str = "", api_key: str = "") -> str:
-    """Audit Annex I essential cybersecurity requirements (both Part 1 product properties
+@paywalled(price="$0.50")
+def audit_annex_i(product_description: str, current_controls: str = "", api_key: str = "",
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.50/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    Audit Annex I essential cybersecurity requirements (both Part 1 product properties
     and Part 2 vulnerability handling) against your current controls.
 
     Behavior:
@@ -365,8 +382,12 @@ def audit_annex_i(product_description: str, current_controls: str = "", api_key:
 
 
 @mcp.tool()
-def sbom_skeleton(product_name: str, components: str = "", api_key: str = "") -> str:
-    """Generate a minimal CycloneDX-style SBOM skeleton required for CRA Article 13.
+@paywalled(price="$0.25")
+def sbom_skeleton(product_name: str, components: str = "", api_key: str = "",
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.25/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    Generate a minimal CycloneDX-style SBOM skeleton required for CRA Article 13.
     Pass components as a comma-separated list or JSON; Pro tier auto-scans dependencies.
 
     Behavior:
@@ -516,8 +537,12 @@ def vulnerability_reporting_readiness(product_description: str, api_key: str = "
 
 
 @mcp.tool()
-def conformity_assessment_roadmap(product_class: str, api_key: str = "") -> str:
-    """Produce a conformity assessment roadmap for CE marking your product under CRA.
+@paywalled(price="$0.25")
+def conformity_assessment_roadmap(product_class: str, api_key: str = "",
+    ctx: Context = None) -> str:
+    """COST WARNING: $0.25/call on x402-billed deployments (hosted); free when self-hosted or X402 is disabled.
+
+    Produce a conformity assessment roadmap for CE marking your product under CRA.
 
     Behavior:
         This tool generates structured output without modifying external systems.
