@@ -43,3 +43,7 @@ Generate a cryptographically signed CRA (Cyber Resilience Act) compliance attest
 
 ## Maintainer
 MEOK AI Labs · hello@meok.ai · https://meok.ai · MIT licensed
+## Pay-per-call (PAYG)
+
+This MCP supports MEOK_PAYG_KEY env var for £0.05-per-call billing without a subscription.
+Top up: https://councilof.ai/payg
