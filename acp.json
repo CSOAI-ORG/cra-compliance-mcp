@@ -1,0 +1,25 @@
+{
+  "acpVersion": "0.1",
+  "agent": {
+    "name": "cra-compliance-mcp",
+    "description": "EU Cyber Resilience Act (Regulation 2024/2847) compliance for AI agents. Product classification...",
+    "version": "1.3.4",
+    "provider": "MEOK AI Labs",
+    "interfaces": [
+      {
+        "type": "mcp",
+        "transport": "stdio",
+        "package": "cra-compliance-mcp"
+      }
+    ],
+    "capabilities": [
+      "classify_product",
+      "audit_annex_i",
+      "sbom_skeleton",
+      "vulnerability_reporting_readiness",
+      "conformity_assessment_roadmap",
+      "enforcement_status",
+      "sign_cra_attestation"
+    ]
+  }
+}
