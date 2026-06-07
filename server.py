@@ -116,10 +116,10 @@ def check_access(api_key: str = ""):
 FREE_DAILY_LIMIT = 10
 _usage: dict[str, list[datetime]] = defaultdict(list)
 
-STRIPE_199 = "https://buy.stripe.com/14A4gB3K4eUWgYR56o8k836"
-STRIPE_499 = "https://buy.stripe.com/28EcN7fsM002fUN1Uc8k835"
-STRIPE_1499 = "https://buy.stripe.com/4gM9AV80kaEG0ZT42k8k837"
-STRIPE_5K = "https://buy.stripe.com/4gM7sN2G0bIKeQJfL28k833"
+STRIPE_199 = "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j"
+STRIPE_499 = "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j"
+STRIPE_1499 = "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j"
+STRIPE_5K = "https://buy.stripe.com/5kQ6oJ0xS3ce8sl7ew8k91j"
 
 
 def _rl(caller: str = "anonymous", tier: str = "free") -> Optional[str]:
