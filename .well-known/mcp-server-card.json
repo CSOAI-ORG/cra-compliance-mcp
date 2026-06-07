@@ -1,0 +1,34 @@
+{
+  "name": "cra-compliance-mcp",
+  "title": "Cra Compliance Mcp",
+  "description": "EU Cyber Resilience Act (Regulation 2024/2847) compliance for AI agents. Product classification, Annex I audit, SBOM generation, conformity assessment roadmap, vulnerability reporting readiness. For manufacturers of products with digital elements. By MEOK AI Labs.",
+  "version": "1.3.4",
+  "homepage": "https://meok.ai",
+  "license": "MIT",
+  "transport": {
+    "type": "stdio"
+  },
+  "tools": [
+    {
+      "name": "classify_product"
+    },
+    {
+      "name": "audit_annex_i"
+    },
+    {
+      "name": "sbom_skeleton"
+    },
+    {
+      "name": "vulnerability_reporting_readiness"
+    },
+    {
+      "name": "conformity_assessment_roadmap"
+    },
+    {
+      "name": "enforcement_status"
+    },
+    {
+      "name": "sign_cra_attestation"
+    }
+  ]
+}

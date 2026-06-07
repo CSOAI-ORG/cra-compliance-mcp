@@ -1,3 +1,4 @@
+<!-- mcp-name: io.github.CSOAI-ORG/cra-compliance-mcp -->
 # Cra Compliance MCP
 
 [![MEOK AI Labs](https://img.shields.io/badge/MEOK-AI%20Labs-667eea)](https://meok.ai)
@@ -98,3 +99,28 @@ MIT © [CSOAI-ORG](https://github.com/CSOAI-ORG)
 <p align="center">
   <sub>Built with 💜 by <a href="https://meok.ai">MEOK AI Labs</a> · UK Companies House 16939677</sub>
 </p>
+
+
+## Configuration
+
+Add to your `claude_desktop_config.json` (Claude Desktop) or your MCP client config:
+
+```json
+{
+  "mcpServers": {
+    "cra-compliance-mcp": {
+      "command": "uvx",
+      "args": ["cra-compliance-mcp"]
+    }
+  }
+}
+```
+
+Or: `pip install cra-compliance-mcp` then run the `cra-compliance-mcp` command (stdio transport).
+
+## Examples
+
+Once configured, ask your assistant, for example:
+- "Use `classify_product` to …"
+- "Use `audit_annex_i` to …"
+- "Use `sbom_skeleton` to …"
