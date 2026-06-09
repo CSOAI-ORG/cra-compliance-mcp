@@ -1,40 +1,37 @@
-name: cra-compliance-mcp
-description: 'Cra Compliance tools for AI agents. Built by MEOK AI Labs.'
-version: 1.0.0
-tools:
-- name: classify_product
-  description: 'Classify Product operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: audit_annex_i
-  description: 'Audit Annex I operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: sbom_skeleton
-  description: 'Sbom Skeleton operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: vulnerability_reporting_readiness
-  description: 'Vulnerability Reporting Readiness operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: conformity_assessment_roadmap
-  description: 'Conformity Assessment Roadmap operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
-- name: enforcement_status
-  description: 'Enforcement Status operation.'
-  parameters:
-  - name: input
-    type: string
-    required: true
+# smithery.yaml — Smithery (https://smithery.ai) submission payload
+# Repo: CSOAI-ORG/cra-compliance-mcp
+# Generated: 2026-06-09
+# Transport: stdio (PyPI package, installed via uvx)
+# See: DISTRIBUTION_GAPS_2026-06-08.md for the channel strategy
+startCommand:
+  type: stdio
+  timeout: 120000
+  pingInterval: 5000
+  pingTimeout: 30000
+  configSchema:
+    type: object
+    required: []
+    properties:
+      apiKey:
+        type: string
+        description: "MEOK API key (optional; required for x402 paywalled tools)"
+        default: ""
+      x402PayTo:
+        type: string
+        description: "USDC address for x402 micropayments (default: meok.ai wallet)"
+        default: ""
+      logLevel:
+        type: string
+        description: "Log level (debug, info, warn, error)"
+        default: "info"
+    additionalProperties: false
+  commandFunction: |-
+    (config) => ({
+      command: 'uvx',
+      args: ['cra_compliance'],
+      env: {
+        MEOK_API_KEY: config.apiKey || '',
+        X402_PAY_TO: config.x402PayTo || '',
+        MEOK_LOG_LEVEL: config.logLevel || 'info',
+      }
+    })
