@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "cra-compliance-mcp": {
+      "command": "uvx",
+      "args": [
+        "cra-compliance-mcp"
+      ]
+    }
+  }
+}
