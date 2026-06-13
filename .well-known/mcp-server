@@ -1,0 +1,5 @@
+{
+  "name": "cra-compliance-mcp",
+  "description": "CRA (Regulation (EU) 2024/2847) compliance for AI system providers.",
+  "version": "1.4.0"
+}
