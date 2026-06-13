@@ -1,0 +1,17 @@
+{
+  "name": "knowing_yucca/cra-compliance-mcp",
+  "title": "MEOK Cra Compliance Mcp",
+  "description": "Compliance MCP server: cra-compliance-mcp",
+  "readme": "# MEOK Cra Compliance Mcp\n\nCompliance MCP from MEOK AI.",
+  "categories": [
+    "AI",
+    "Compliance",
+    "Governance"
+  ],
+  "defaultRunInput": {
+    "tool": "quick_scan",
+    "arguments": {
+      "system": "example"
+    }
+  }
+}

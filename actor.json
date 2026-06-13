@@ -1,0 +1,10 @@
+{
+  "name": "knowing_yucca/cra-compliance-mcp",
+  "title": "MEOK Cra Compliance Mcp",
+  "description": "Compliance MCP server",
+  "categories": [
+    "AI",
+    "Compliance"
+  ],
+  "isPublic": true
+}
