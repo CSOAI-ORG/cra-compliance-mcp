@@ -123,10 +123,10 @@ def check_access(api_key: str = ""):
 FREE_DAILY_LIMIT = 50
 _usage: dict[str, list[datetime]] = defaultdict(list)
 
-STRIPE_199 = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
-STRIPE_499 = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
-STRIPE_1499 = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
-STRIPE_5K = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"
+STRIPE_199 = "https://meok.ai/pricing"
+STRIPE_499 = "https://meok.ai/pricing"
+STRIPE_1499 = "https://meok.ai/pricing"
+STRIPE_5K = "https://meok.ai/pricing"
 
 
 def _rl(caller: str = "anonymous", tier: str = "free") -> Optional[str]:
@@ -141,7 +141,7 @@ def _rl(caller: str = "anonymous", tier: str = "free") -> Optional[str]:
         return (
             f"Free tier limit ({FREE_DAILY_LIMIT}/day). Unlock unlimited + full CRA "
             f"conformity assessment + Annex II SBOM export + signed attestation: "
-            f"Pro £199/mo at {STRIPE_199}"
+            f"Pro a per-job quote at {STRIPE_199}"
         )
     _usage[caller].append(now)
     return None
@@ -407,7 +407,7 @@ def audit_annex_i(product_description: str, current_controls: str = "", api_key:
         "top_priority_gaps": gaps[:5],
         "next_step": "Run sbom_skeleton + vulnerability_reporting_readiness to close the most common gaps.",
         "requirements_detail": results,
-        "upsell": f"Generate signed CRA attestation + SBOM export for auditor/notified-body handoff. Pro £199/mo: {STRIPE_199}" if tier == "free" else None,
+        "upsell": f"Generate signed CRA attestation + SBOM export for auditor/notified-body handoff. Pro a per-job quote: {STRIPE_199}" if tier == "free" else None,
     }, indent=2)
 
 
@@ -489,7 +489,7 @@ def sbom_skeleton(product_name: str, components: str = "", api_key: str = "",
             "Or `npx @cyclonedx/cyclonedx-npm` for Node.js",
             "Store SBOM with each product release; make available to notified body on request",
         ],
-        "upsell": f"Enterprise tier auto-scans dependencies + signs SBOM + pushes to Trust Center: £1,499/mo {STRIPE_1499}" if tier != "enterprise" else None,
+        "upsell": f"Enterprise tier auto-scans dependencies + signs SBOM + pushes to Trust Center: a per-job quote {STRIPE_1499}" if tier != "enterprise" else None,
     }, indent=2)
 
 
@@ -719,7 +719,7 @@ def sign_cra_attestation(
         return json.dumps({"error": msg, "upgrade_url": STRIPE_199})
     if tier == "free":
         return json.dumps({
-            "error": "Signed attestations require Pro (£199/mo) or Enterprise tier.",
+            "error": "Signed attestations require Pro or Enterprise tier.",
             "upgrade_url": STRIPE_199,
             "why_pro": "HMAC-signed attestations with public verify URL. Auditor-accepted, unlike unsigned self-reports.",
         })
